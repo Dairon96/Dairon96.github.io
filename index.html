@@ -7,305 +7,110 @@
 <meta name="description" content="Portafolio de Dairon Vilaú Santalla, desarrollador indie de videojuegos y aplicaciones móviles bajo la marca daironapps.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --void:#090c13;
-    --panel:#10141f;
-    --panel-2:#161b2c;
-    --line: rgba(148,163,196,0.14);
-    --line-strong: rgba(148,163,196,0.28);
-    --text-primary:#eaf0ff;
-    --text-muted:#8b96b3;
-    --text-dim:#5c6785;
-    --cyan:#4fd8e8;
-    --cyan-dim: rgba(79,216,232,0.14);
-    --purple:#b48cfa;
-    --purple-dim: rgba(180,140,250,0.14);
-    --amber:#ff9f4a;
-    --amber-dim: rgba(255,159,74,0.14);
-    --green:#6ee7a0;
-    --green-dim: rgba(110,231,160,0.14);
+    --bg:#000000;
+    --panel:#0a0a0a;
+    --line: rgba(255,255,255,0.12);
+    --line-soft: rgba(255,255,255,0.06);
+    --text:#f5f5f2;
+    --text-mid:#9a9a94;
+    --text-dim:#5c5c58;
+    --accent:#ff5a2e;
   }
-
   *{ box-sizing:border-box; }
   html{ scroll-behavior:smooth; }
   body{
-    margin:0;
-    background:var(--void);
-    color:var(--text-primary);
-    font-family:'Inter', sans-serif;
-    line-height:1.6;
-    overflow-x:hidden;
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:'Inter', sans-serif; line-height:1.6;
   }
-  h1,h2,h3,.mono-label{
-    font-family:'Chakra Petch', sans-serif;
-    letter-spacing:0.02em;
-  }
+  h1,h2,h3{ font-family:'Fraunces', serif; margin:0; }
   .mono{ font-family:'JetBrains Mono', monospace; }
   a{ color:inherit; }
   img{ max-width:100%; display:block; }
+  ::selection{ background:var(--accent); color:#000; }
 
-  ::selection{ background:var(--cyan-dim); color:var(--cyan); }
+  .wrap{ max-width:1040px; margin:0 auto; padding:0 28px; }
 
-  /* background grid + scanlines, fixed behind everything */
-  .bg-grid{
-    position:fixed; inset:0; z-index:0; pointer-events:none;
-    background-image:
-      linear-gradient(rgba(148,163,196,0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(148,163,196,0.05) 1px, transparent 1px);
-    background-size: 42px 42px;
-    mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, black 40%, transparent 100%);
-  }
-  .bg-scan{
-    position:fixed; inset:0; z-index:1; pointer-events:none;
-    background: repeating-linear-gradient(
-      to bottom,
-      rgba(255,255,255,0.015) 0px,
-      rgba(255,255,255,0.015) 1px,
-      transparent 1px,
-      transparent 3px
-    );
-    opacity:0.5;
-  }
-  .bg-glow{
-    position:fixed; top:-20%; left:50%; transform:translateX(-50%);
-    width:1100px; height:600px; z-index:0; pointer-events:none;
-    background: radial-gradient(circle, rgba(79,216,232,0.10) 0%, rgba(180,140,250,0.05) 45%, transparent 70%);
-    filter: blur(10px);
-  }
-
-  .wrap{ position:relative; z-index:2; max-width:1080px; margin:0 auto; padding:0 24px; }
-
-  /* nav */
-  nav{
-    position:fixed; top:0; left:0; right:0; z-index:50;
-    background: rgba(9,12,19,0.72);
-    backdrop-filter: blur(10px);
-    border-bottom:1px solid var(--line);
-  }
+  nav{ position:fixed; top:0; left:0; right:0; z-index:50; border-bottom:1px solid var(--line-soft); background:rgba(0,0,0,0.85); backdrop-filter:blur(8px); }
   nav .wrap{ display:flex; align-items:center; justify-content:space-between; height:64px; }
-  .brand{ display:flex; align-items:center; gap:10px; text-decoration:none; }
-  .brand-dot{ width:9px; height:9px; border-radius:2px; background:var(--cyan); box-shadow:0 0 10px var(--cyan); }
-  .brand-name{ font-family:'Chakra Petch', sans-serif; font-weight:600; font-size:16px; letter-spacing:0.03em; }
-  .brand-name span{ color:var(--cyan); }
+  .brand{ font-family:'Fraunces', serif; font-weight:600; font-size:17px; text-decoration:none; }
   .navlinks{ display:flex; gap:32px; list-style:none; margin:0; padding:0; }
-  .navlinks a{
-    text-decoration:none; color:var(--text-muted); font-size:14px; font-weight:500;
-    font-family:'Chakra Petch', sans-serif; letter-spacing:0.04em; text-transform:uppercase;
-    transition: color 0.2s;
-  }
-  .navlinks a:hover{ color:var(--cyan); }
-  .nav-toggle{ display:none; }
+  .navlinks a{ text-decoration:none; font-size:13px; color:var(--text-mid); letter-spacing:0.04em; text-transform:uppercase; transition:color 0.2s; }
+  .navlinks a:hover{ color:var(--text); }
 
-  /* hero */
-  header.hero{
-    position:relative; z-index:2;
-    padding:168px 0 96px;
-    min-height:92vh;
-    display:flex; align-items:center;
-  }
-  .eyebrow{
-    display:inline-flex; align-items:center; gap:8px;
-    font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--cyan);
-    border:1px solid rgba(79,216,232,0.3); background:var(--cyan-dim);
-    padding:6px 12px; border-radius:3px; margin-bottom:28px;
-  }
-  .eyebrow::before{
-    content:''; width:6px; height:6px; border-radius:50%; background:var(--cyan);
-    box-shadow:0 0 8px var(--cyan);
-    animation: blink 1.6s infinite;
-  }
-  @keyframes blink{ 0%,100%{opacity:1;} 50%{opacity:0.25;} }
+  header.hero{ padding:200px 0 120px; }
+  .hero .eyebrow{ font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:28px; }
+  .hero h1{ font-size:clamp(52px, 9vw, 118px); font-weight:600; line-height:0.96; letter-spacing:-0.01em; }
+  .hero .role{ font-size:clamp(16px,2vw,20px); color:var(--text-mid); max-width:600px; margin:32px 0 0; font-weight:400; }
+  .hero .role .a{ color:var(--text); border-bottom:1px solid var(--accent); }
 
-  .hero h1{
-    font-size:clamp(40px, 6.5vw, 76px);
-    font-weight:700; line-height:1.02; margin:0 0 8px;
-  }
-  .hero h1 .last{ color:transparent; -webkit-text-stroke:1.5px var(--text-primary); }
-  .hero .role{
-    font-size:clamp(16px, 2.4vw, 22px); color:var(--text-muted); font-weight:500;
-    margin:18px 0 30px; max-width:640px;
-  }
-  .hero .role .accent{ color:var(--purple); }
+  section{ padding:100px 0; border-top:1px solid var(--line-soft); }
+  .sec-label{ font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:14px; display:block; }
+  .sec-title{ font-size:clamp(30px,4vw,44px); font-weight:600; margin-bottom:16px; }
+  .sec-intro{ color:var(--text-mid); max-width:540px; font-size:15.5px; margin:0; }
 
-  .terminal{
-    margin-top:8px; max-width:600px;
-    background:var(--panel); border:1px solid var(--line-strong);
-    border-radius:8px; overflow:hidden;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+  /* project rows */
+  .proj-list{ margin-top:56px; }
+  .proj-row{
+    display:grid; grid-template-columns:56px 64px 1fr auto; align-items:center; gap:24px;
+    padding:28px 0; border-top:1px solid var(--line-soft); text-decoration:none;
+    transition:opacity 0.2s;
   }
-  .terminal-bar{
-    display:flex; align-items:center; gap:6px;
-    padding:10px 14px; border-bottom:1px solid var(--line);
-    background:var(--panel-2);
-  }
-  .terminal-bar span{ width:9px; height:9px; border-radius:50%; background:var(--line-strong); }
-  .terminal-bar .t-label{
-    margin-left:8px; font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--text-dim);
-  }
-  .terminal-body{
-    padding:18px 18px 22px;
-    font-family:'JetBrains Mono', monospace; font-size:13.5px; color:var(--text-muted);
-  }
-  .terminal-body .line{ margin:0 0 10px; }
-  .terminal-body .prompt{ color:var(--green); }
-  .terminal-body .val{ color:var(--text-primary); }
-  .cursor{
-    display:inline-block; width:7px; height:15px; background:var(--cyan); margin-left:2px;
-    animation: blink 1s steps(1) infinite; vertical-align:-2px;
-  }
+  .proj-row:last-child{ border-bottom:1px solid var(--line-soft); }
+  .proj-num{ font-family:'JetBrains Mono', monospace; font-size:13px; color:var(--text-dim); }
+  .proj-icon{ width:56px; height:56px; border-radius:12px; overflow:hidden; border:1px solid var(--line); flex-shrink:0; }
+  .proj-icon img{ width:100%; height:100%; object-fit:cover; }
+  .proj-mid h3{ font-size:24px; font-weight:600; margin:0 0 6px; }
+  .proj-mid p{ margin:0; color:var(--text-mid); font-size:14.5px; max-width:520px; }
+  .proj-meta{ text-align:right; }
+  .proj-status{ font-family:'JetBrains Mono', monospace; font-size:11px; text-transform:uppercase; letter-spacing:0.05em; display:block; margin-bottom:8px; }
+  .status-live{ color:#7de87d; }
+  .status-testing{ color:var(--accent); }
+  .proj-link{ font-size:13px; text-decoration:none; color:var(--text); display:inline-flex; align-items:center; gap:6px; }
+  .proj-link.disabled{ color:var(--text-dim); }
+  .proj-link svg{ width:13px; height:13px; }
+  .proj-row:hover .proj-mid h3{ color:var(--accent); }
 
-  .hero-cta{ display:flex; gap:14px; margin-top:34px; flex-wrap:wrap; }
-  .btn{
-    display:inline-flex; align-items:center; gap:8px;
-    font-family:'Chakra Petch', sans-serif; font-weight:600; font-size:14px; letter-spacing:0.03em;
-    text-transform:uppercase; text-decoration:none;
-    padding:13px 24px; border-radius:4px; transition: all 0.2s; cursor:pointer; border:none;
+  @media (max-width:640px){
+    .proj-row{ grid-template-columns:40px 48px 1fr; }
+    .proj-meta{ grid-column:2/4; text-align:left; padding-left:0; }
   }
-  .btn-primary{ background:var(--cyan); color:#04141a; }
-  .btn-primary:hover{ box-shadow:0 0 24px rgba(79,216,232,0.5); transform:translateY(-1px); }
-  .btn-ghost{ background:transparent; color:var(--text-primary); border:1px solid var(--line-strong); }
-  .btn-ghost:hover{ border-color:var(--cyan); color:var(--cyan); }
-
-  /* section shell */
-  section{ position:relative; z-index:2; padding:110px 0; }
-  .sec-head{ margin-bottom:56px; }
-  .sec-index{
-    font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--text-dim);
-    display:block; margin-bottom:10px;
-  }
-  .sec-index .n{ color:var(--cyan); }
-  .sec-head h2{ font-size:clamp(28px,4vw,38px); font-weight:700; margin:0 0 12px; }
-  .sec-head p{ color:var(--text-muted); max-width:560px; margin:0; font-size:15.5px; }
-
-  /* projects grid */
-  .projects-grid{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
-  .card{
-    background:var(--panel); border:1px solid var(--line); border-radius:10px;
-    padding:26px; display:flex; flex-direction:column; gap:16px;
-    transition: border-color 0.25s, transform 0.25s;
-    position:relative; overflow:hidden;
-  }
-  .card::before{
-    content:''; position:absolute; top:0; left:0; right:0; height:2px;
-    background: var(--accent, var(--cyan));
-    opacity:0.85;
-  }
-  .card:hover{ transform:translateY(-3px); border-color: var(--accent, var(--line-strong)); }
-  .card-top{ display:flex; gap:16px; align-items:flex-start; }
-  .card-icon{
-    width:64px; height:64px; border-radius:14px; overflow:hidden; flex-shrink:0;
-    border:1px solid var(--line);
-  }
-  .card-icon img{ width:100%; height:100%; object-fit:cover; }
-  .card-titles{ flex:1; min-width:0; }
-  .card-titles h3{ font-size:19px; font-weight:600; margin:0 0 6px; }
-  .status{
-    display:inline-flex; align-items:center; gap:6px;
-    font-family:'JetBrains Mono', monospace; font-size:11px; text-transform:uppercase; letter-spacing:0.05em;
-    padding:3px 9px; border-radius:3px;
-  }
-  .status::before{ content:''; width:6px; height:6px; border-radius:50%; }
-  .status-live{ background:var(--green-dim); color:var(--green); }
-  .status-live::before{ background:var(--green); box-shadow:0 0 6px var(--green); }
-  .status-testing{ background:var(--amber-dim); color:var(--amber); }
-  .status-testing::before{ background:var(--amber); box-shadow:0 0 6px var(--amber); animation:blink 1.6s infinite; }
-
-  .card p.desc{ color:var(--text-muted); font-size:14.5px; margin:0; flex:1; }
-  .tags{ display:flex; flex-wrap:wrap; gap:8px; }
-  .tag{
-    font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--text-dim);
-    border:1px solid var(--line); padding:3px 9px; border-radius:3px;
-  }
-  .card-cta{
-    display:inline-flex; align-items:center; gap:7px;
-    font-family:'Chakra Petch', sans-serif; font-weight:600; font-size:13px; text-transform:uppercase;
-    letter-spacing:0.03em; text-decoration:none; color:var(--accent, var(--cyan));
-    margin-top:4px;
-  }
-  .card-cta.disabled{ color:var(--text-dim); cursor:default; }
-  .card-cta svg{ width:14px; height:14px; transition:transform 0.2s; }
-  .card-cta:hover svg{ transform:translate(2px,-2px); }
 
   /* about */
-  .about-grid{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:56px; align-items:start; }
-  .about-text p{ color:var(--text-muted); font-size:15.5px; margin:0 0 16px; }
-  .about-text strong{ color:var(--text-primary); font-weight:600; }
-  .specs{
-    background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:24px;
-  }
-  .specs-head{
-    font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--text-dim);
-    text-transform:uppercase; letter-spacing:0.06em; margin-bottom:18px;
-    padding-bottom:14px; border-bottom:1px solid var(--line);
-  }
-  .spec-group{ margin-bottom:20px; }
-  .spec-group:last-child{ margin-bottom:0; }
-  .spec-group h4{
-    font-family:'Chakra Petch', sans-serif; font-size:13px; font-weight:600; color:var(--purple);
-    text-transform:uppercase; letter-spacing:0.04em; margin:0 0 10px;
-  }
-  .spec-pills{ display:flex; flex-wrap:wrap; gap:8px; }
-  .pill{
-    font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--text-primary);
-    background:var(--panel-2); border:1px solid var(--line); padding:5px 11px; border-radius:4px;
-  }
+  .about-grid{ display:grid; grid-template-columns:1.2fr 0.8fr; gap:64px; margin-top:56px; }
+  .about-text p{ color:var(--text-mid); font-size:16px; margin:0 0 18px; }
+  .about-text strong{ color:var(--text); font-weight:600; }
+  .stack-group{ margin-bottom:26px; }
+  .stack-group h4{ font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.06em; margin:0 0 10px; }
+  .stack-items{ display:flex; flex-wrap:wrap; gap:8px; }
+  .stack-items span{ font-size:13px; color:var(--text); border:1px solid var(--line); padding:5px 12px; border-radius:20px; }
 
   /* contact */
-  .contact-panel{
-    background:var(--panel); border:1px solid var(--line-strong); border-radius:12px;
-    padding:48px; display:flex; justify-content:space-between; align-items:center; gap:32px; flex-wrap:wrap;
-    position:relative; overflow:hidden;
-  }
-  .contact-panel::after{
-    content:''; position:absolute; top:0; right:0; width:280px; height:280px;
-    background:radial-gradient(circle, rgba(180,140,250,0.12) 0%, transparent 70%);
-  }
-  .contact-left h2{ font-size:28px; margin:0 0 10px; }
-  .contact-left p{ color:var(--text-muted); margin:0; max-width:380px; font-size:14.5px; }
-  .contact-links{ display:flex; gap:14px; flex-wrap:wrap; position:relative; z-index:1; }
-  .contact-link{
-    display:flex; align-items:center; gap:10px;
-    background:var(--panel-2); border:1px solid var(--line); border-radius:8px;
-    padding:14px 18px; text-decoration:none; min-width:220px;
-    transition: border-color 0.2s, transform 0.2s;
-  }
-  .contact-link:hover{ border-color:var(--cyan); transform:translateY(-2px); }
-  .contact-link .ic{
-    width:36px; height:36px; border-radius:8px; display:flex; align-items:center; justify-content:center;
-    background:var(--cyan-dim); color:var(--cyan); flex-shrink:0;
-  }
-  .contact-link .lbl{ font-family:'JetBrains Mono', monospace; font-size:10.5px; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.05em; display:block; }
-  .contact-link .val{ font-size:14px; font-weight:500; color:var(--text-primary); }
+  .contact-row{ display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:40px; margin-top:48px; }
+  .contact-big{ font-size:clamp(30px,5vw,54px); font-weight:600; font-family:'Fraunces', serif; }
+  .contact-links{ display:flex; flex-direction:column; gap:14px; }
+  .contact-links a{ text-decoration:none; font-size:16px; display:flex; align-items:center; gap:10px; }
+  .contact-links .lbl{ font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--text-dim); text-transform:uppercase; margin-right:6px; }
+  .contact-links a:hover{ color:var(--accent); }
 
-  footer{
-    position:relative; z-index:2; border-top:1px solid var(--line); padding:32px 0;
-  }
-  footer .wrap{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; }
+  footer{ padding:32px 0; border-top:1px solid var(--line-soft); }
+  footer .wrap{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; }
   footer p{ margin:0; font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--text-dim); }
 
-  @media (max-width: 760px){
+  @media (max-width:760px){
     .navlinks{ display:none; }
     .about-grid{ grid-template-columns:1fr; gap:36px; }
-    .projects-grid{ grid-template-columns:1fr; }
-    .contact-panel{ padding:32px 24px; flex-direction:column; align-items:flex-start; }
-    header.hero{ padding:140px 0 72px; min-height:auto; }
+    header.hero{ padding:150px 0 80px; }
   }
 </style>
 </head>
 <body>
 
-<div class="bg-grid"></div>
-<div class="bg-glow"></div>
-<div class="bg-scan"></div>
-
 <nav>
   <div class="wrap">
-    <a href="#top" class="brand">
-      <span class="brand-dot"></span>
-      <span class="brand-name">dairon<span>apps</span></span>
-    </a>
+    <a href="#top" class="brand">daironapps</a>
     <ul class="navlinks">
       <li><a href="#proyectos">Proyectos</a></li>
       <li><a href="#sobre-mi">Sobre mí</a></li>
@@ -316,113 +121,77 @@
 
 <header class="hero" id="top">
   <div class="wrap">
-    <span class="eyebrow">SYSTEM ONLINE · PINAR DEL RÍO, CUBA</span>
-    <h1>Dairon Vilaú<br>Santalla</h1>
-    <p class="role">Desarrollador indie de videojuegos y aplicaciones móviles bajo la marca <span class="accent">daironapps</span>. Estudiante de Ingeniería Informática.</p>
-
-    <div class="terminal">
-      <div class="terminal-bar">
-        <span></span><span></span><span></span>
-        <span class="t-label">whoami.sh</span>
-      </div>
-      <div class="terminal-body">
-        <p class="line"><span class="prompt">$</span> cat perfil.json</p>
-        <p class="line">rol: <span class="val">"gamedev indie + estudiante"</span></p>
-        <p class="line">stack: <span class="val">["Unity", "C#", "Java", "PostgreSQL"]</span></p>
-        <p class="line">apps_publicadas: <span class="val">3</span></p>
-        <p class="line">estado: <span class="val">"construyendo"</span><span class="cursor"></span></p>
-      </div>
-    </div>
-
-    <div class="hero-cta">
-      <a href="#proyectos" class="btn btn-primary">Ver proyectos</a>
-      <a href="#contacto" class="btn btn-ghost">Contactar</a>
-    </div>
+    <span class="eyebrow mono">Pinar del Río, Cuba</span>
+    <h1>Dairon<br>Vilaú Santalla</h1>
+    <p class="role">Desarrollador indie de <span class="a">videojuegos</span> y aplicaciones móviles bajo la marca daironapps. Estudiante de Ingeniería Informática.</p>
   </div>
 </header>
 
 <section id="proyectos">
   <div class="wrap">
-    <div class="sec-head">
-      <span class="sec-index"><span class="n">01</span> / catálogo</span>
-      <h2>Proyectos publicados</h2>
-      <p>Cuatro aplicaciones desarrolladas y lanzadas para Android bajo daironapps, desde juegos hasta herramientas para desarrolladores.</p>
-    </div>
+    <span class="sec-label">01 / catálogo</span>
+    <h2 class="sec-title">Proyectos publicados</h2>
+    <p class="sec-intro">Cuatro aplicaciones desarrolladas y lanzadas para Android bajo daironapps, desde juegos hasta herramientas para desarrolladores.</p>
 
-    <div class="projects-grid">
+    <div class="proj-list">
 
-      <!-- Distract Shot -->
-      <article class="card" style="--accent: var(--amber);">
-        <div class="card-top">
-          <div class="card-icon"><img src="assets/distractshot.png" alt="Icono de Distract Shot"></div>
-          <div class="card-titles">
-            <h3>Distract Shot</h3>
-            <span class="status status-live">Disponible</span>
-          </div>
-        </div>
-        <p class="desc">Shooter con temática western y física de retroceso realista. Incluye multijugador, tabla de líderes y skins desbloqueables.</p>
-        <div class="tags">
-          <span class="tag">Unity</span><span class="tag">C#</span><span class="tag">Multijugador</span>
-        </div>
-        <a href="https://play.google.com/store/apps/details?id=com.daironapps.distractshot&pli=1" target="_blank" rel="noopener" class="card-cta">
-          Ver en Google Play
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
-        </a>
-      </article>
+      <a class="proj-row" href="https://play.google.com/store/apps/details?id=com.daironapps.distractshot&pli=1" target="_blank" rel="noopener">
+        <span class="proj-num">01</span>
+        <span class="proj-icon"><img src="assets/distractshot.png" alt="Icono de Distract Shot"></span>
+        <span class="proj-mid">
+          <h3>Distract Shot</h3>
+          <p>Shooter western con física de retroceso, multijugador, tabla de líderes y skins desbloqueables.</p>
+        </span>
+        <span class="proj-meta">
+          <span class="proj-status status-live mono">Disponible</span>
+          <span class="proj-link">Google Play
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
+          </span>
+        </span>
+      </a>
 
-      <!-- The Lost Grimoire -->
-      <article class="card" style="--accent: var(--purple);">
-        <div class="card-top">
-          <div class="card-icon"><img src="assets/grimoire.jpeg" alt="Icono de The Lost Grimoire"></div>
-          <div class="card-titles">
-            <h3>The Lost Grimoire</h3>
-            <span class="status status-live">Disponible</span>
-          </div>
-        </div>
-        <p class="desc">Puzzle de deducción estilo Mastermind con temática de alquimia. Tienda cosmética, moneda de runas y localización en tres idiomas.</p>
-        <div class="tags">
-          <span class="tag">Unity</span><span class="tag">C#</span><span class="tag">Puzzle</span>
-        </div>
-        <a href="https://play.google.com/store/apps/details?id=com.daironapps.thelostgrimoire" target="_blank" rel="noopener" class="card-cta">
-          Ver en Google Play
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
-        </a>
-      </article>
+      <a class="proj-row" href="https://play.google.com/store/apps/details?id=com.daironapps.thelostgrimoire" target="_blank" rel="noopener">
+        <span class="proj-num">02</span>
+        <span class="proj-icon"><img src="assets/grimoire.jpeg" alt="Icono de The Lost Grimoire"></span>
+        <span class="proj-mid">
+          <h3>The Lost Grimoire</h3>
+          <p>Puzzle de deducción estilo Mastermind con temática de alquimia, tienda cosmética y localización en tres idiomas.</p>
+        </span>
+        <span class="proj-meta">
+          <span class="proj-status status-live mono">Disponible</span>
+          <span class="proj-link">Google Play
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
+          </span>
+        </span>
+      </a>
 
-      <!-- Contador de dinero -->
-      <article class="card" style="--accent: var(--green);">
-        <div class="card-top">
-          <div class="card-icon"><img src="assets/contador.png" alt="Icono de Contador de dinero"></div>
-          <div class="card-titles">
-            <h3>Contador de dinero</h3>
-            <span class="status status-live">Disponible</span>
-          </div>
-        </div>
-        <p class="desc">Utilidad para contar y totalizar billetes y monedas de forma rápida, pensada para agilizar el conteo de efectivo en el día a día.</p>
-        <div class="tags">
-          <span class="tag">Android</span><span class="tag">Utilidad</span>
-        </div>
-        <a href="https://play.google.com/store/apps/details?id=com.daironapps.contadordedinero" target="_blank" rel="noopener" class="card-cta">
-          Ver en Google Play
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
-        </a>
-      </article>
+      <a class="proj-row" href="https://play.google.com/store/apps/details?id=com.daironapps.contadordedinero" target="_blank" rel="noopener">
+        <span class="proj-num">03</span>
+        <span class="proj-icon"><img src="assets/contador.png" alt="Icono de Contador de dinero"></span>
+        <span class="proj-mid">
+          <h3>Contador de dinero</h3>
+          <p>Utilidad para contar y totalizar billetes y monedas de forma rápida, pensada para el día a día.</p>
+        </span>
+        <span class="proj-meta">
+          <span class="proj-status status-live mono">Disponible</span>
+          <span class="proj-link">Google Play
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
+          </span>
+        </span>
+      </a>
 
-      <!-- DevSwap -->
-      <article class="card" style="--accent: var(--cyan);">
-        <div class="card-top">
-          <div class="card-icon"><img src="assets/devswap.png" alt="Icono de DevSwap"></div>
-          <div class="card-titles">
-            <h3>DevSwap</h3>
-            <span class="status status-testing">Prueba cerrada</span>
-          </div>
-        </div>
-        <p class="desc">Herramienta de intercambio de testers para desarrolladores Android, similar a AppHive. Ayuda a validar apps antes de su lanzamiento.</p>
-        <div class="tags">
-          <span class="tag">Android</span><span class="tag">Dev tools</span>
-        </div>
-        <span class="card-cta disabled">En prueba cerrada</span>
-      </article>
+      <div class="proj-row" style="cursor:default;">
+        <span class="proj-num">04</span>
+        <span class="proj-icon"><img src="assets/devswap.png" alt="Icono de DevSwap"></span>
+        <span class="proj-mid">
+          <h3>DevSwap</h3>
+          <p>Herramienta de intercambio de testers para desarrolladores Android, similar a AppHive.</p>
+        </span>
+        <span class="proj-meta">
+          <span class="proj-status status-testing mono">Prueba cerrada</span>
+          <span class="proj-link disabled">No disponible aún</span>
+        </span>
+      </div>
 
     </div>
   </div>
@@ -430,42 +199,39 @@
 
 <section id="sobre-mi">
   <div class="wrap">
-    <div class="sec-head">
-      <span class="sec-index"><span class="n">02</span> / perfil</span>
-      <h2>Sobre mí</h2>
-    </div>
+    <span class="sec-label">02 / perfil</span>
+    <h2 class="sec-title">Sobre mí</h2>
 
     <div class="about-grid">
       <div class="about-text">
         <p>Soy <strong>Dairon Vilaú Santalla</strong>, estudiante de <strong>Ingeniería Informática</strong> en la Universidad de Pinar del Río, Cuba, y desarrollador indie bajo la marca <strong>daironapps</strong>. Combino el estudio formal de sistemas con el desarrollo práctico de juegos y herramientas que llegan a jugadores reales.</p>
         <p>Empecé publicando juegos y apps web sencillas, y desde entonces he ido subiendo el nivel: arquitecturas más sólidas, sistemas de guardado preparados para la nube, monetización con anuncios e IAP, y localización multi-idioma. Ahora mismo estoy inmerso en una refactorización profesional de mi próximo juego estilo survivor para Unity, con foco en Google Play y potencialmente PC.</p>
-        <p>Me interesa el desarrollo tanto como oficio creativo como proyecto emprendedor: prefiero herramientas gratuitas, flujos de trabajo prácticos, y avanzar paso a paso entendiendo cada pieza del sistema antes de construir sobre ella.</p>
+        <p>Prefiero herramientas gratuitas, flujos de trabajo prácticos, y avanzar paso a paso entendiendo cada pieza del sistema antes de construir sobre ella.</p>
       </div>
 
-      <div class="specs">
-        <div class="specs-head">// stack técnico</div>
-        <div class="spec-group">
+      <div class="stack">
+        <div class="stack-group">
           <h4>Lenguajes</h4>
-          <div class="spec-pills">
-            <span class="pill">C#</span><span class="pill">Java</span><span class="pill">JavaScript</span><span class="pill">SQL</span>
+          <div class="stack-items">
+            <span>C#</span><span>Java</span><span>JavaScript</span><span>SQL</span>
           </div>
         </div>
-        <div class="spec-group">
-          <h4>Motores &amp; frameworks</h4>
-          <div class="spec-pills">
-            <span class="pill">Unity</span><span class="pill">Android SDK</span>
+        <div class="stack-group">
+          <h4>Motores y frameworks</h4>
+          <div class="stack-items">
+            <span>Unity</span><span>Android SDK</span>
           </div>
         </div>
-        <div class="spec-group">
+        <div class="stack-group">
           <h4>Herramientas</h4>
-          <div class="spec-pills">
-            <span class="pill">Git / GitHub</span><span class="pill">PostgreSQL</span><span class="pill">IntelliJ</span><span class="pill">Google Play Console</span>
+          <div class="stack-items">
+            <span>Android Studio</span><span>Git / GitHub</span><span>PostgreSQL</span><span>IntelliJ</span><span>Google Play Console</span>
           </div>
         </div>
-        <div class="spec-group">
+        <div class="stack-group">
           <h4>Monetización</h4>
-          <div class="spec-pills">
-            <span class="pill">AdMob</span><span class="pill">AdSense</span><span class="pill">IAP</span>
+          <div class="stack-items">
+            <span>AdMob</span><span>AdSense</span><span>IAP</span>
           </div>
         </div>
       </div>
@@ -475,30 +241,12 @@
 
 <section id="contacto">
   <div class="wrap">
-    <div class="contact-panel">
-      <div class="contact-left">
-        <h2>Hablemos</h2>
-        <p>¿Tienes un proyecto en mente, feedback sobre alguna de mis apps, o quieres colaborar? Escríbeme.</p>
-      </div>
+    <span class="sec-label">03 / contacto</span>
+    <div class="contact-row">
+      <h2 class="contact-big">Hablemos.</h2>
       <div class="contact-links">
-        <a class="contact-link" href="mailto:vilaudairon@gmail.com">
-          <span class="ic">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M4 4l8 8 8-8"/></svg>
-          </span>
-          <span>
-            <span class="lbl">Email</span>
-            <span class="val">vilaudairon@gmail.com</span>
-          </span>
-        </a>
-        <a class="contact-link" href="https://instagram.com/daironvilausantalla" target="_blank" rel="noopener">
-          <span class="ic">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
-          </span>
-          <span>
-            <span class="lbl">Instagram</span>
-            <span class="val">@daironvilausantalla</span>
-          </span>
-        </a>
+        <a href="mailto:vilaudairon@gmail.com"><span class="lbl mono">Email</span>vilaudairon@gmail.com</a>
+        <a href="https://instagram.com/daironvilausantalla" target="_blank" rel="noopener"><span class="lbl mono">Instagram</span>@daironvilausantalla</a>
       </div>
     </div>
   </div>
